@@ -167,6 +167,7 @@ def train(opt):
     # apply sync_bn can solve it,
     # by packing all mini-batch across all gpus as one batch and normalize, then send it back to all gpus.
     # but it would also slow down the training by a little bit.
+
     if params.num_gpus > 1 and opt.batch_size // params.num_gpus < 4:
         model.apply(replace_w_sync_bn)
         use_sync_bn = True

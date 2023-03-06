@@ -5,8 +5,7 @@ from torch import nn
 
 from efficientdet.model import BiFPN, Regressor, Classifier, EfficientNet
 from efficientdet.utils import Anchors
-
-
+from efficientnet.utils import Swish,MemoryEfficientSwish
 class EfficientDetBackbone(nn.Module):
     def __init__(self, num_classes=80, compound_coef=0, load_weights=False, **kwargs):
         super(EfficientDetBackbone, self).__init__()
@@ -63,7 +62,13 @@ class EfficientDetBackbone(nn.Module):
         for m in self.modules():
             if isinstance(m, nn.BatchNorm2d):
                 m.eval()
+    def set_swish(self, memory_efficient=True):
+        """Sets swish function as memory efficient (for training) or standard (for export).
 
+        Args:
+            memory_efficient (bool): Whether to use memory-efficient version of swish.
+        """
+        self._swish = MemoryEfficientSwish() if memory_efficient else Swish()
     def forward(self, inputs):
         max_size = inputs.shape[-1]
 

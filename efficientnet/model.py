@@ -101,7 +101,7 @@ class MBConvBlock(nn.Module):
             x = x + inputs  # skip connection
         return x
 
-    def set_swish(self, memory_efficient=True):
+    def set_swish(self, memory_efficient=False):
         """Sets swish function as memory efficient (for training) or standard (for export)"""
         self._swish = MemoryEfficientSwish() if memory_efficient else Swish()
 
@@ -169,7 +169,7 @@ class EfficientNet(nn.Module):
         self._fc = nn.Linear(out_channels, self._global_params.num_classes)
         self._swish = MemoryEfficientSwish()
 
-    def set_swish(self, memory_efficient=True):
+    def set_swish(self, memory_efficient=False):
         """Sets swish function as memory efficient (for training) or standard (for export)"""
         self._swish = MemoryEfficientSwish() if memory_efficient else Swish()
         for block in self._blocks:

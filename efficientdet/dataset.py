@@ -5,6 +5,7 @@ import numpy as np
 from torch.utils.data import Dataset, DataLoader
 from pycocotools.coco import COCO
 import cv2
+from PIL import Image
 
 
 class CocoDataset(Dataset):

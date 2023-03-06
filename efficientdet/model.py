@@ -16,7 +16,7 @@ class SeparableConvBlock(nn.Module):
     created by Zylo117
     """
 
-    def __init__(self, in_channels, out_channels=None, norm=True, activation=False, onnx_export=False):
+    def __init__(self, in_channels, out_channels=None, norm=True, activation=False, onnx_export=True):
         super(SeparableConvBlock, self).__init__()
         if out_channels is None:
             out_channels = in_channels
@@ -57,7 +57,7 @@ class BiFPN(nn.Module):
     modified by Zylo117
     """
 
-    def __init__(self, num_channels, conv_channels, first_time=False, epsilon=1e-4, onnx_export=False, attention=True,
+    def __init__(self, num_channels, conv_channels, first_time=False, epsilon=1e-4, onnx_export=True, attention=True,
                  use_p8=False):
         """
 
@@ -346,7 +346,7 @@ class Regressor(nn.Module):
     modified by Zylo117
     """
 
-    def __init__(self, in_channels, num_anchors, num_layers, pyramid_levels=5, onnx_export=False):
+    def __init__(self, in_channels, num_anchors, num_layers, pyramid_levels=5, onnx_export=True):
         super(Regressor, self).__init__()
         self.num_layers = num_layers
 
@@ -382,7 +382,7 @@ class Classifier(nn.Module):
     modified by Zylo117
     """
 
-    def __init__(self, in_channels, num_anchors, num_classes, num_layers, pyramid_levels=5, onnx_export=False):
+    def __init__(self, in_channels, num_anchors, num_classes, num_layers, pyramid_levels=5, onnx_export=True):
         super(Classifier, self).__init__()
         self.num_anchors = num_anchors
         self.num_classes = num_classes
